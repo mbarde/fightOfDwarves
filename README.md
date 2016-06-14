@@ -1,3 +1,11 @@
+Fight of Dwarves
+-------------------------------------------------------------------------------
+Beat em up game based on MelonJS.
+http://melonjs.github.io/tutorial-platformer/
+
+Currently textures are from http://opengameart.org/
+Licenses need to be re-checked.
+
 melonJS boilerplate
 -------------------------------------------------------------------------------
 
