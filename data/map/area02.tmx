@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="castle_tileset_part1_0" tilewidth="32" tileheight="32" tilecount="672">
+  <image source="../img/map/castle_tileset_part1_0.png" width="512" height="1344"/>
+ </tileset>
+ <tileset firstgid="673" name="castle_tileset_part3" tilewidth="32" tileheight="32" tilecount="192">
+  <image source="../img/map/castle_tileset_part3.png" width="512" height="384"/>
+ </tileset>
+ <tileset firstgid="865" name="castle_tileset_part2" tilewidth="32" tileheight="32" tilecount="336">
+  <image source="../img/map/castle_tileset_part2.png" width="512" height="672"/>
+ </tileset>
+ <layer name="wall" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJx7wsjA8GQQYxAYSeYNdjyYww8GqG0eNczEBqhpFrnmEguoaRYus4kBAGF52kU=
+  </data>
+ </layer>
+ <layer name="background" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBg64CATffWRC4i1jxJ3XWckXy+6/duB9A4m6rnpONCME1QIc5B5YAw06wYTgk8VMxmpYx42s6kJqG3eUAcA8usVHA==
+  </data>
+ </layer>
+ <layer name="foreground" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJytkksOwyAMRCdh1317vx4hR0qjLrtu1ItkmwvkCImKRREjy6HkY2mEgfHTCFEDqE/WDakeLvWj75+0l36kffS//Xol3kt5mFdyhh8j8roM71++WK07Nx9g5xP23YU1l499Oh+X3DfEW8vHvlw+Pbvn/awaqjD7QZDOZxX/QbYJSzT7i0lp8booZgX7XzvFE/VIimclLGYyT97M6ktYa0xLpSzNtPJtZR3RFz6rRls=
+  </data>
+ </layer>
+</map>
