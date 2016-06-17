@@ -5,8 +5,8 @@ game.PlayScreen = me.ScreenObject.extend({
     onResetEvent: function() {
 		
 		// load a level
-		var h = Math.floor((Math.random() * 6) + 1);
-		h = 1;
+		var h = Math.floor((Math.random() * 7) + 1);
+		//h = 7;
 		me.levelDirector.loadLevel("area0" + h);
 		
         // reset the score
