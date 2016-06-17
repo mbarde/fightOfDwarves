@@ -37,6 +37,11 @@ PlayerEntity = me.Entity.extend({
      * update the player pos
      */
     update : function (dt) {		
+		var p = me.game.world.getChildByName("player" + this.playerid)[0];
+		if (p.pos.y > 540) { 
+			game.data.health[this.playerid-1] = 0;
+		}
+	
 		if (game.data.health[this.playerid-1] <= 0) {
 			game.data.health[this.playerid-1] = 0;
 			if (!this.renderable.isCurrentAnimation("die")) {
@@ -72,11 +77,7 @@ PlayerEntity = me.Entity.extend({
 		
 		if (!this.body.isAttacked && me.input.isKeyPressed('attack' + this.playerid)) {
 			this.body.attacking = true;
-			var b = this.body;
-			
-			//var p1 = me.game.world.getChildByName("mainPlayer")[0];
-			//p1.pos.x += 60;
-			
+			var b = this.body;			
 			this.renderable.setCurrentAnimation("attack", function() {
 				b.attacking = false;
 				this.setCurrentAnimation("stand");

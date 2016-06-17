@@ -5,7 +5,9 @@ game.PlayScreen = me.ScreenObject.extend({
     onResetEvent: function() {
 		
 		// load a level
-		me.levelDirector.loadLevel("area03");
+		var h = Math.floor((Math.random() * 6) + 1);
+		h = 1;
+		me.levelDirector.loadLevel("area0" + h);
 		
         // reset the score
         game.data.health = [];

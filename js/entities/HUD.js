@@ -45,7 +45,6 @@ game.HUD.HealthItem = me.Renderable.extend( {
     // create a font
     this.font = new me.BitmapFont("32x32_font", 32);
     this.font.set("right");
-	this.font.fillStyle = "white";
 	
 	this.health_offs = [ {x: 20, y: 0}, {x: 540, y: 0}, {x: 20, y: -430}, {x: 540, y: -430} ]
  
