@@ -4,10 +4,10 @@ var game = {
 
     // an object where to store game information
     data : {
-        health1 : 100,
-		health2 : 100
+		initHealth: 100,
+		playerCount: 4,
+        health : []
     },
-
 
     // Run on page load.
     "onload" : function () {
@@ -25,7 +25,7 @@ var game = {
         }
 
         // Initialize the audio.
-        me.audio.init("mp3,ogg");
+		me.audio.init("mp3,ogg");
 
         // Set a callback to run when loading is complete.
         me.loader.onload = this.loaded.bind(this);
@@ -34,27 +34,44 @@ var game = {
         me.loader.preload(game.resources);
 
         // Initialize melonJS and display a loading screen.
-        me.state.change(me.state.LOADING);
+        me.state.change(me.state.LOADING)
     },
 
     // Run on game resources loaded.
     "loaded" : function () {
         me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());
-
-        me.pool.register("mainPlayer", game.PlayerEntity);
-		me.pool.register("secondPlayer", game.secondPlayer);
+		
+		game.data.health = [];
+		for (var i = 0; i < game.data.playerCount; i++) {
+			game.data.health.push(game.data.initHealth);
+		}
+		
+        me.pool.register("player1", game.Player1Entity);
+		me.pool.register("player2", game.Player2Entity);
+		if (game.data.playerCount > 2) { me.pool.register("player3", game.Player3Entity); }
+		if (game.data.playerCount > 3) { me.pool.register("player4", game.Player4Entity); }
 		
 		// enable the keyboard
-		me.input.bindKey(me.input.KEY.LEFT,  "left");
-		me.input.bindKey(me.input.KEY.RIGHT, "right");
-		me.input.bindKey(me.input.KEY.X,     "jump", true);
-		me.input.bindKey(me.input.KEY.C, "attack", true);
+		me.input.bindKey(me.input.KEY.LEFT,  "left1");
+		me.input.bindKey(me.input.KEY.RIGHT, "right1");
+		me.input.bindKey(me.input.KEY.UP,     "jump1", true);
+		me.input.bindKey(me.input.KEY.Y, "attack1", true);
 		
 		me.input.bindKey(me.input.KEY.A,  "left2");
 		me.input.bindKey(me.input.KEY.D, "right2");
 		me.input.bindKey(me.input.KEY.W,     "jump2", true);
 		me.input.bindKey(me.input.KEY.Q, "attack2", true);
+		
+		me.input.bindKey(me.input.KEY.F,  "left3");
+		me.input.bindKey(me.input.KEY.G, "right3");
+		me.input.bindKey(me.input.KEY.T,     "jump3", true);
+		me.input.bindKey(me.input.KEY.R, "attack3", true);
+		
+		me.input.bindKey(me.input.KEY.B,  "left4");
+		me.input.bindKey(me.input.KEY.N, "right4");
+		me.input.bindKey(me.input.KEY.H,  "jump4", true);
+		me.input.bindKey(me.input.KEY.J, "attack4", true);
 
         // Start the game.
         me.state.change(me.state.PLAY);

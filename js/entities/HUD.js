@@ -45,25 +45,31 @@ game.HUD.HealthItem = me.Renderable.extend( {
     // create a font
     this.font = new me.BitmapFont("32x32_font", 32);
     this.font.set("right");
+	this.font.fillStyle = "white";
+	
+	this.health_offs = [ {x: 20, y: 0}, {x: 540, y: 0}, {x: 20, y: -430}, {x: 540, y: -430} ]
  
-    this.health1 = 100;
-	this.health2 = 100;
+	this.health = [];
+    for (var i = 0; i < game.data.playerCount; i++) { this.health.push(game.initHealth); }
   },
  
   /**
   * update function
   */
   update : function (dt) {
-    if (this.health1 !== game.data.health1 || this.health2 !== game.data.health2) {
-      this.health1 = game.data.health1;
-	  this.health2 = game.data.health2;
-      return true;
-    }
-    return false;
+	made_changes = false;
+	for (var i = 0; i < game.data.playerCount; i++) {
+		if (this.health[i] !== game.data.health[i]) {
+		  this.health[i] = game.data.health[i];
+		  made_changes = true;
+		}
+	}
+    return made_changes;
   },
   
   draw : function (renderer) {
-    this.font.draw (renderer, game.data.health1, this.pos.x + 20, this.pos.y);	
-    this.font.draw (renderer, game.data.health2, this.pos.x + 540, this.pos.y);
+	for (var i = 0; i < game.data.playerCount; i++) {
+		this.font.draw(renderer, game.data.health[i], this.pos.x + this.health_offs[i].x, this.pos.y + this.health_offs[i].y);
+	}
   }
 });

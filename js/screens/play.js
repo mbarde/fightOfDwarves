@@ -5,12 +5,14 @@ game.PlayScreen = me.ScreenObject.extend({
     onResetEvent: function() {
 		
 		// load a level
-		me.levelDirector.loadLevel("area01");
+		me.levelDirector.loadLevel("area03");
 		
         // reset the score
-        game.data.health1 = 100;
-        game.data.health2 = 100;
-
+        game.data.health = [];
+		for (var i = 0; i < game.data.playerCount; i++) {
+			game.data.health.push(game.data.initHealth);
+		}
+		
         // add our HUD to the game world
         this.HUD = new game.HUD.Container();
         me.game.world.addChild(this.HUD);
