@@ -122,7 +122,9 @@ PlayerEntity = me.Entity.extend({
 		 // if dead		
 		
 		// return true if we moved or if the renderable was updated
-		this._super(me.Entity, 'update', [dt]);
+		this._super(me.Entity, 'update', [dt]);		
+		
+		game.playScreen.check_for_win();
 		return true;
 	},
 
