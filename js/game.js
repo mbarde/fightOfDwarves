@@ -4,10 +4,12 @@ var game = {
 
     // an object where to store game information
     data : {
-		initHealth: 100,
-		playerCount: 4,
+		    initHealth: 100,
+		    playerCount: 4,
         health : []
     },
+
+    players : [],
 
     // Run on page load.
     "onload" : function () {

@@ -31,6 +31,12 @@ game.PlayScreen = me.ScreenObject.extend({
       this.HUD = new game.HUD.Container();
       me.game.world.addChild(this.HUD);
 
+      game.players.entities = new Array(4);
+  		game.players[0] = me.game.world.getChildByName("player1")[0];
+  		game.players[1] = me.game.world.getChildByName("player2")[0];
+  		game.players[2] = me.game.world.getChildByName("player3")[0];
+  		game.players[3] = me.game.world.getChildByName("player4")[0];
+
       me.input.bindKey(me.input.KEY.ESC, "escape", true);
       this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge) {
           if (action === "escape") {
