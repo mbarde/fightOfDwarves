@@ -175,21 +175,20 @@ PlayerEntity = me.Entity.extend({
               (!response.a.renderable.lastflipX && response.a.pos.x <= response.b.pos.x) // attacker stands on left side of attacked
             )
           ) {
-          console.log(response.a);
-  				this.body.isAttacked = true;
-  				game.data.health[this.playerid-1] -= response.a.body.current_attack_power;
-          response.a.body.current_attack_power = 0;
-            me.audio.play("hit01");
+  				      this.body.isAttacked = true;
+			          game.data.health[this.playerid-1] -= response.a.body.current_attack_power;
+                response.a.body.current_attack_power = 0;
+                me.audio.play("hit01");
 
-          //this.body.vel.y = - this.body.maxVel.y * 0.2 * me.timer.tick;
-          if (response.a.pos.x > response.b.pos.x) {
-            this.body.push_power_x = -35;
-          } else {
-            this.body.push_power_x = 35;
-          }
+                //this.body.vel.y = - this.body.maxVel.y * 0.2 * me.timer.tick;
+                if (response.a.pos.x > response.b.pos.x) {
+                  this.body.push_power_x = -35;
+                } else {
+                  this.body.push_power_x = 35;
+                }
 
-  				var b = this.body;
-  				this.renderable.flicker(100, function() { b.isAttacked = false; });
+			          var b = this.body;
+	              this.renderable.flicker(100, function() { b.isAttacked = false; });
   		  }
   		  return false;
       } else {

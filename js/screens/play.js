@@ -1,4 +1,5 @@
 game.PlayScreen = me.ScreenObject.extend({
+
     /**
      *  action to perform on state change
      */
@@ -27,8 +28,12 @@ game.PlayScreen = me.ScreenObject.extend({
   		}
 
       // add our HUD to the game world
-      this.HUD = new game.HUD.Container();
-      me.game.world.addChild(this.HUD);
+      if (typeof this.HUD == 'undefined') {
+          this.HUD = new game.HUD.Container();
+      }
+      if (!me.game.world.hasChild(this.HUD)) {
+        me.game.world.addChild(this.HUD);
+      }
 
       game.players.entities = new Array(4);
   		game.players[0] = me.game.world.getChildByName("player1")[0];
@@ -36,12 +41,18 @@ game.PlayScreen = me.ScreenObject.extend({
   		game.players[2] = me.game.world.getChildByName("player3")[0];
   		game.players[3] = me.game.world.getChildByName("player4")[0];
 
+      game.winner_screen = false;
+
       me.input.bindKey(me.input.KEY.ESC, "escape", true);
+      var helper = this;
       this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge) {
           if (action === "escape") {
-            //me.game.world.removeChild(this.HUD);
             me.audio.stopTrack();
             me.state.change(me.state.MENU);
+          }
+          if (game.winner_screen) {
+              game.winner_screen = false;
+              helper.reset();
           }
       });
 
@@ -54,11 +65,34 @@ game.PlayScreen = me.ScreenObject.extend({
 			if (game.data.health[i] <= 0) { c++; }
 			else { winner_id = i; }
 		}
-		if (c == game.data.playerCount-1) {
+		if (c == game.data.playerCount-1 && !game.winner_screen) {
       me.audio.pauseTrack();
-			console.log('Player ' + (winner_id+1) + ' wins!');
-			alert('Player ' + (winner_id+1) + ' wins!');
-			this.reset();
+      game.winner_screen = true;
+
+      // Add text Player X won!
+      me.game.world.addChild(new (me.Renderable.extend ({
+        init : function () {
+          this._super(me.Renderable, 'init', [0, 0, me.game.viewport.width, me.game.viewport.height]);
+          this.font = new me.BitmapFont("32x32_font", 32, 1.0);
+          this.font_big = new me.BitmapFont("32x32_font", 32, 1.4);
+        },
+
+        update : function (dt) {
+          return true;
+        },
+
+        draw : function (renderer) {
+          var txt = "PLAYER " + (winner_id+1);
+          var x_off = Math.round( this.font_big.measureText(renderer, txt).width / 2 );
+          this.font_big.draw(renderer, txt, 320 - x_off, 270);
+
+          txt = "THE NEW KING:";
+          x_off = Math.round( this.font.measureText(renderer, txt).width / 2 );
+          this.font.draw(renderer, txt, 320 - x_off, 200);
+        },
+        onDestroyEvent : function () {
+        }
+      })), 9);
 		}
 	},
 
@@ -67,6 +101,6 @@ game.PlayScreen = me.ScreenObject.extend({
      */
     onDestroyEvent: function() {
         // remove the HUD from the game world
-        me.game.world.removeChild(this.HUD);
+        me.game.world.removeChild(this.HUD, true);
     }
 });

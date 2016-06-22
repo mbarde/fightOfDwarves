@@ -5,13 +5,13 @@ game.TitleScreen = me.ScreenObject.extend({
    */
   onResetEvent : function () {
 
-    me.audio.playTrack("menu");
+    if (game.music_volume > 0) { me.audio.playTrack("menu", game.music_volume); }
 
     // title screen
     var backgroundImage = new me.Sprite(0, 0,
-		{
-			image: me.loader.getImage('title_screen'),
-		}
+  		{
+  			image: me.loader.getImage('title_screen'),
+  		}
     );
 
 		game.TitleScreen.map_selected = 0;
@@ -30,7 +30,10 @@ game.TitleScreen = me.ScreenObject.extend({
 			{ text: "CONTROLS 2", values: ["VBGF"], selection: 0, ctrl_id: 1 },
 			{ text: "CONTROLS 3", values: ["JKIU"], selection: 0, ctrl_id: 2 },
 			{ text: "CONTROLS 4", values: ["ARROWSPACE"], selection: 0, ctrl_id: 3 },
-			{ text: "MAP", values: [ "RANDOM", "HALL OF SHAME", "DEEP DUNGEON", "PILLARS OF CLASH", "GOLDHAND", "4 COLORS", "WINDOW SHOPPERS", "UP AND DOWN"], selection: 0 }
+			{ text: "MAP", values: [ "RANDOM", "BLOODY HALL", "DEEP DUNGEON", "PILLARS OF CLASH", "GOLDHAND", "4 COLORS", "WINDOW SHOPPERS", "UP AND DOWN"], selection: 0,
+        on_change: function(setting) { game.TitleScreen.map_selected = setting.selection; } },
+      { text: "MUSIC VOL", values: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0], selection: 0,
+        on_change: function(setting) { game.music_volume = setting.values[setting.selection] / 100; } }
 		];
 
 		game.TitleScreen.selected_setting = 0;
@@ -130,8 +133,7 @@ game.TitleScreen = me.ScreenObject.extend({
 	      if (action === "enter") {
 					if (game.TitleScreen.selected_setting == 0) { // start when "Play" is selected and enter is pressed
             me.audio.stopTrack();
-            me.audio.playTrack("03 Ferrous Rage", 0.3);
-						game.TitleScreen.map_selected = game.TitleScreen.settings[6].selection;
+            if (game.music_volume > 0) { me.audio.playTrack("03 Ferrous Rage", game.music_volume); }
 	        	me.state.change(me.state.PLAY);
 					}
 
@@ -159,12 +161,18 @@ game.TitleScreen = me.ScreenObject.extend({
 							setting.selection = setting.values.length-1;
 						}
 						setting.selection = setting.selection % setting.values.length;
+            if (typeof setting.on_change === 'function') {
+              setting.on_change(setting); // fire on change callback if given
+            }
 					}
 				}
 				if (action === "right" || action === "enter") {
 					var setting = game.TitleScreen.settings[ game.TitleScreen.selected_setting ];
 					if (setting.values.length > 1) {
 							setting.selection = ++setting.selection % setting.values.length;
+              if (typeof setting.on_change === 'function') {
+                setting.on_change(setting); // fire on change callback if given
+              }
 					}
 				}
 

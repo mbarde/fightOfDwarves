@@ -2,6 +2,8 @@
 /* Game namespace */
 var game = {
 
+    music_volume: 0.0,
+
     // an object where to store game information
     data : {
 		    initHealth: 100,
