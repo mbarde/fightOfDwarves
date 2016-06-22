@@ -4,6 +4,9 @@ game.TitleScreen = me.ScreenObject.extend({
    * action to perform on state change
    */
   onResetEvent : function () {
+
+    me.audio.playTrack("menu");
+
     // title screen
     var backgroundImage = new me.Sprite(0, 0,
 		{
@@ -50,7 +53,7 @@ game.TitleScreen = me.ScreenObject.extend({
         // a tween to animate the arrow
         this.scrollertween = new me.Tween(this).to({scrollerpos: -2200 }, 10000).onComplete(this.scrollover.bind(this)).start();
 
-        this.scroller = "       OH SO SAD! THE KING OF THE DWARFS HAS DIED!       DWARFS OF THE WORLD UNITE AND FIGHT FOR THE CROWN!";
+        this.scroller = "       OH WHAT A SHAME! THE KING OF THE DWARFS HAS DIED!       DWARFS OF THE WORLD UNITE AND FIGHT FOR THE CROWN!";
         this.scrollerpos = 600;
       },
 
@@ -126,7 +129,8 @@ game.TitleScreen = me.ScreenObject.extend({
 
 	      if (action === "enter") {
 					if (game.TitleScreen.selected_setting == 0) { // start when "Play" is selected and enter is pressed
-	        	//me.audio.play("cling");
+            me.audio.stopTrack();
+            me.audio.playTrack("03 Ferrous Rage", 0.3);
 						game.TitleScreen.map_selected = game.TitleScreen.settings[6].selection;
 	        	me.state.change(me.state.PLAY);
 					}

@@ -3,7 +3,6 @@ game.PlayScreen = me.ScreenObject.extend({
      *  action to perform on state change
      */
     onResetEvent: function() {
-
       // Set controls regarding to title screen settings
       var ctrls = game.TitleScreen.controls;
       for (var i = 1; i < 5; i++) {
@@ -41,6 +40,7 @@ game.PlayScreen = me.ScreenObject.extend({
       this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keyCode, edge) {
           if (action === "escape") {
             //me.game.world.removeChild(this.HUD);
+            me.audio.stopTrack();
             me.state.change(me.state.MENU);
           }
       });
@@ -55,6 +55,7 @@ game.PlayScreen = me.ScreenObject.extend({
 			else { winner_id = i; }
 		}
 		if (c == game.data.playerCount-1) {
+      me.audio.pauseTrack();
 			console.log('Player ' + (winner_id+1) + ' wins!');
 			alert('Player ' + (winner_id+1) + ' wins!');
 			this.reset();

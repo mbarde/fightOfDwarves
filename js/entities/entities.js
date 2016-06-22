@@ -55,6 +55,7 @@ PlayerEntity = me.Entity.extend({
 		if (game.data.health[this.playerid-1] <= 0) {
 			game.data.health[this.playerid-1] = 0;
 			if (!this.renderable.isCurrentAnimation("die")) {
+        me.audio.play("dead01");
 				var b = this.body;
 				this.body.dead = true;
       	this.body.vel.x = 0;
@@ -108,6 +109,7 @@ PlayerEntity = me.Entity.extend({
     }
 
 		if (!this.body.isAttacked && !this.body.attacking && me.input.isKeyPressed('attack' + this.playerid)) {
+      me.audio.play("attack02");
 			this.body.attacking = true;
       this.body.current_attack_power = 10;
 			var b = this.body;
@@ -125,9 +127,10 @@ PlayerEntity = me.Entity.extend({
 			this.renderable.setCurrentAnimation("stand");
 		}
 
-		if (me.input.isKeyPressed('jump' + this.playerid) && !this.body.on_ladder) {
+		if (me.input.isKeyPressed('jump' + this.playerid)) {
 			// make sure we are not already jumping or falling
 			if (!this.body.jumping && !this.body.falling) {
+          me.audio.play("jump01");
 				// set current vel to the maximum defined value
 				// gravity will then do the rest
 				this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
@@ -176,6 +179,7 @@ PlayerEntity = me.Entity.extend({
   				this.body.isAttacked = true;
   				game.data.health[this.playerid-1] -= response.a.body.current_attack_power;
           response.a.body.current_attack_power = 0;
+            me.audio.play("hit01");
 
           //this.body.vel.y = - this.body.maxVel.y * 0.2 * me.timer.tick;
           if (response.a.pos.x > response.b.pos.x) {
