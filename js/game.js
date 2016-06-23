@@ -2,7 +2,7 @@
 /* Game namespace */
 var game = {
 
-    music_volume: 0.0,
+    music_volume: 0.3,
 
     // an object where to store game information
     data : {
@@ -43,19 +43,19 @@ var game = {
 
     // Run on game resources loaded.
     "loaded" : function () {
-		this.playScreen = new game.PlayScreen();
+		    this.playScreen = new game.PlayScreen();
         me.state.set(me.state.PLAY, this.playScreen);
         me.state.set(me.state.MENU, new game.TitleScreen());
 
-		game.data.health = [];
-		for (var i = 0; i < game.data.playerCount; i++) {
-			game.data.health.push(game.data.initHealth);
-		}
+		  game.data.health = [];
+	    for (var i = 0; i < game.data.playerCount; i++) {
+			           game.data.health.push(game.data.initHealth);
+      }
 
     me.pool.register("player1", game.Player1Entity);
-		me.pool.register("player2", game.Player2Entity);
-		if (game.data.playerCount > 2) { me.pool.register("player3", game.Player3Entity); }
-		if (game.data.playerCount > 3) { me.pool.register("player4", game.Player4Entity); }
+    me.pool.register("player2", game.Player2Entity);
+    if (game.data.playerCount > 2) { me.pool.register("player3", game.Player3Entity); }
+    if (game.data.playerCount > 3) { me.pool.register("player4", game.Player4Entity); }
 
 		// enable the keyboard
     /**

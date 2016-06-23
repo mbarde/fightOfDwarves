@@ -5,20 +5,8 @@ PlayerEntity = me.Entity.extend({
      * constructor
      */
     init:function (x, y, settings) {
-        // call the constructor
-        this._super(me.Entity, 'init', [x, y , settings]);
-
-		// set the default horizontal & vertical speed (accel vector)
-		this.body.setVelocity(3, 15);
-
-		// custom init
-		this.body.dead = false; // is body dead?
-		this.body.boost_active = false; // is a boost active? (trampoline effect)
-    this.body.push_power_x = 0; // a additional vertical velocity added up to x velocity and being reduced each timestep
-    this.body.attacking = false; // is body currently performing attack move
-    this.body.isAttacked = false; // is body currently being attacked
-    this.body.current_attack_power = 0; // power of current attack (amount of health reduce to enemy). Is set to certain value when attack starts.
-                                        // Set to 0 when enemy has been hit to avoid multiple hits per attack.
+    // call the constructor
+    this._super(me.Entity, 'init', [x, y , settings]);
 
 		// set the display to follow our position on both axis
 		// me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
@@ -39,8 +27,25 @@ PlayerEntity = me.Entity.extend({
 
 		// define a standing animation (using the first frame)
 		this.renderable.addAnimation("stand",  [16,17,18,19]);
-		// set the standing animation as default
-		this.renderable.setCurrentAnimation("jump");
+
+    this.reset();
+    },
+
+    reset: function() {
+      // set the default horizontal & vertical speed (accel vector)
+  		this.body.setVelocity(3, 15);
+
+  		// custom init
+  		this.body.dead = false; // is body dead?
+  		this.body.boost_active = false; // is a boost active? (trampoline effect)
+      this.body.push_power_x = 0; // a additional vertical velocity added up to x velocity and being reduced each timestep
+      this.body.attacking = false; // is body currently performing attack move
+      this.body.isAttacked = false; // is body currently being attacked
+      this.body.current_attack_power = 0; // power of current attack (amount of health reduce to enemy). Is set to certain value when attack starts.
+                                          // Set to 0 when enemy has been hit to avoid multiple hits per attack.
+
+  		// set the standing animation as default
+  		this.renderable.setCurrentAnimation("jump");
     },
 
     /**

@@ -8,7 +8,9 @@ game.TitleScreen = me.ScreenObject.extend({
     if (game.music_volume > 0) { me.audio.playTrack("menu", game.music_volume); }
 
     // title screen
-    var backgroundImage = new me.Sprite(0, 0,
+    var backgroundImage = new me.Sprite(
+      me.game.viewport.width / 2,
+      me.game.viewport.height / 2,
   		{
   			image: me.loader.getImage('title_screen'),
   		}
@@ -103,6 +105,12 @@ game.TitleScreen = me.ScreenObject.extend({
     me.input.bindKey(me.input.KEY.LEFT, "left", true);
 		me.input.bindKey(me.input.KEY.RIGHT, "right", true);
 		me.input.bindKey(me.input.KEY.UP, "up", true);
+
+    me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LY, threshold: -0.5}, me.input.KEY.UP);
+    me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LY, threshold:  0.5}, me.input.KEY.DOWN);
+    me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold: -0.5}, me.input.KEY.LEFT);
+    me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold:  0.5}, me.input.KEY.RIGHT);
+    me.input.bindGamepad(0, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_1}, me.input.KEY.ENTER);
 
 		this.log_controls = -1;
 		this.log_controls_state = -1;

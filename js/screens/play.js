@@ -12,6 +12,11 @@ game.PlayScreen = me.ScreenObject.extend({
         me.input.bindKey(ctrls[i-1][2],   "jump" + i, true);
         me.input.bindKey(ctrls[i-1][3], "attack" + i, true);
       }
+      
+      me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold: -0.5}, game.TitleScreen.controls[0][0]);
+      me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold:  0.5}, game.TitleScreen.controls[0][1]);
+      me.input.bindGamepad(0, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_1}, game.TitleScreen.controls[0][2]);
+      me.input.bindGamepad(0, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_2}, game.TitleScreen.controls[0][3]);
 
       var h = 0;
       if (game.TitleScreen.map_selected == 0) {
@@ -35,7 +40,7 @@ game.PlayScreen = me.ScreenObject.extend({
         me.game.world.addChild(this.HUD);
       }
 
-      game.players.entities = new Array(4);
+      game.players = new Array(4);
   		game.players[0] = me.game.world.getChildByName("player1")[0];
   		game.players[1] = me.game.world.getChildByName("player2")[0];
   		game.players[2] = me.game.world.getChildByName("player3")[0];
@@ -52,7 +57,11 @@ game.PlayScreen = me.ScreenObject.extend({
           }
           if (game.winner_screen) {
               game.winner_screen = false;
-              helper.reset();
+              //game.reset();
+              //helper.reset();
+              //game.reset();
+              me.state.change(me.state.MENU);
+              me.state.change(me.state.PLAY);
           }
       });
 
