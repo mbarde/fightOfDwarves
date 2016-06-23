@@ -106,11 +106,13 @@ game.TitleScreen = me.ScreenObject.extend({
 		me.input.bindKey(me.input.KEY.RIGHT, "right", true);
 		me.input.bindKey(me.input.KEY.UP, "up", true);
 
+    /**
     me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LY, threshold: -0.5}, me.input.KEY.UP);
     me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LY, threshold:  0.5}, me.input.KEY.DOWN);
     me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold: -0.5}, me.input.KEY.LEFT);
     me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold:  0.5}, me.input.KEY.RIGHT);
     me.input.bindGamepad(0, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_1}, me.input.KEY.ENTER);
+    **/
 
 		this.log_controls = -1;
 		this.log_controls_state = -1;
@@ -192,12 +194,6 @@ game.TitleScreen = me.ScreenObject.extend({
    * action to perform when leaving this screen (state change)
    */
   onDestroyEvent : function () {
-    me.input.unbindKey(me.input.KEY.ENTER);
-		me.input.unbindKey(me.input.KEY.DOWN);
-    me.input.unbindKey(me.input.KEY.LEFT);
-		me.input.unbindKey(me.input.KEY.RIGHT);
-		me.input.unbindKey(me.input.KEY.UP);
-
     me.event.unsubscribe(this.handler);
   }
 });

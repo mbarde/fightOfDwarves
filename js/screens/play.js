@@ -6,17 +6,17 @@ game.PlayScreen = me.ScreenObject.extend({
     onResetEvent: function() {
       // Set controls regarding to title screen settings
       var ctrls = game.TitleScreen.controls;
-      for (var i = 1; i < 5; i++) {
-        me.input.bindKey(ctrls[i-1][0],  "left" + i);
-        me.input.bindKey(ctrls[i-1][1], "right" + i);
-        me.input.bindKey(ctrls[i-1][2],   "jump" + i, true);
-        me.input.bindKey(ctrls[i-1][3], "attack" + i, true);
+      for (var i = 0; i < 4; i++) {
+        me.input.bindKey(ctrls[i][0],  "left" + (i+1));
+        me.input.bindKey(ctrls[i][1], "right" + (i+1));
+        me.input.bindKey(ctrls[i][2],   "jump" + (i+1), true);
+        me.input.bindKey(ctrls[i][3], "attack" + (i+1), true);
+
+        me.input.bindGamepad(i, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold: -0.5}, ctrls[i][0]);
+        me.input.bindGamepad(i, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold:  0.5}, ctrls[i][1]);
+        me.input.bindGamepad(i, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_1}, ctrls[i][2]);
+        me.input.bindGamepad(i, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_2}, ctrls[i][3]);
       }
-      
-      me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold: -0.5}, game.TitleScreen.controls[0][0]);
-      me.input.bindGamepad(0, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold:  0.5}, game.TitleScreen.controls[0][1]);
-      me.input.bindGamepad(0, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_1}, game.TitleScreen.controls[0][2]);
-      me.input.bindGamepad(0, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_2}, game.TitleScreen.controls[0][3]);
 
       var h = 0;
       if (game.TitleScreen.map_selected == 0) {
