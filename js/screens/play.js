@@ -20,7 +20,7 @@ game.PlayScreen = me.ScreenObject.extend({
 
       var h = 0;
       if (game.TitleScreen.map_selected == 0) {
-  		    h = Math.floor((Math.random() * 7) + 1);
+  		    h = Math.floor((Math.random() * 8) + 1);
       } else {
           h = game.TitleScreen.map_selected;
       }
@@ -95,7 +95,7 @@ game.PlayScreen = me.ScreenObject.extend({
           var x_off = Math.round( this.font_big.measureText(renderer, txt).width / 2 );
           this.font_big.draw(renderer, txt, 320 - x_off, 270);
 
-          txt = "THE NEW KING:";
+          txt = "THE NEW KING IS";
           x_off = Math.round( this.font.measureText(renderer, txt).width / 2 );
           this.font.draw(renderer, txt, 320 - x_off, 200);
         },

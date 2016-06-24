@@ -32,7 +32,7 @@ game.TitleScreen = me.ScreenObject.extend({
 			{ text: "CONTROLS 2", values: ["VBGF"], selection: 0, ctrl_id: 1 },
 			{ text: "CONTROLS 3", values: ["JKIU"], selection: 0, ctrl_id: 2 },
 			{ text: "CONTROLS 4", values: ["ARROWSPACE"], selection: 0, ctrl_id: 3 },
-			{ text: "MAP", values: [ "RANDOM", "BLOODY HALL", "DEEP DUNGEON", "PILLARS OF CLASH", "GOLDHAND", "4 COLORS", "WINDOW SHOPPERS", "UP AND DOWN"], selection: 0,
+			{ text: "MAP", values: [ "RANDOM", "BLOODY HALL", "DEEP DUNGEON", "PILLARS OF CLASH", "GOLDHAND", "4 COLORS", "WINDOW SHOPPERS", "UP AND DOWN", "CORRIDOR"], selection: 0,
         on_change: function(setting) { game.TitleScreen.map_selected = setting.selection; } },
       { text: "MUSIC VOL", values: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0], selection: 0,
         on_change: function(setting) { game.music_volume = setting.values[setting.selection] / 100; } }

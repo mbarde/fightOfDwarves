@@ -1,1 +1,5 @@
-menu.mp3 : We're the Resistors by Eric Skiff (http://ericskiff.com/music/)
+data/sfx/menu.mp3 : We're the Resistors by Eric Skiff (http://ericskiff.com/music/)
+
+http://ozzed.net/music/
+data/sfx/03 Ferrous Rage.mp3
+data/sfx/05 Highway Slaughter.mp3
