@@ -6,9 +6,9 @@ var game = {
 
     // an object where to store game information
     data : {
-		    initHealth: 100,
-		    playerCount: 4,
-        health : []
+		   initHealth: 100,
+		   playerCount: 4,
+        	health : []
     },
 
     players : [],
@@ -51,12 +51,12 @@ var game = {
 	    for (var i = 0; i < game.data.playerCount; i++) {
 			           game.data.health.push(game.data.initHealth);
       }
-
+    /**
     me.pool.register("player1", game.Player1Entity);
     me.pool.register("player2", game.Player2Entity);
     if (game.data.playerCount > 2) { me.pool.register("player3", game.Player3Entity); }
     if (game.data.playerCount > 3) { me.pool.register("player4", game.Player4Entity); }
-
+	 **/
 		// enable the keyboard
     /**
 		me.input.bindKey(me.input.KEY.LEFT,  "left1");

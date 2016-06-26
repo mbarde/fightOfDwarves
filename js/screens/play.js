@@ -6,7 +6,7 @@ game.PlayScreen = me.ScreenObject.extend({
     onResetEvent: function() {
       // Set controls regarding to title screen settings
       var ctrls = game.TitleScreen.controls;
-      for (var i = 0; i < 4; i++) {
+      for (var i = 0; i < game.data.playerCount; i++) {
         me.input.bindKey(ctrls[i][0],  "left" + (i+1));
         me.input.bindKey(ctrls[i][1], "right" + (i+1));
         me.input.bindKey(ctrls[i][2],   "jump" + (i+1), true);
@@ -16,15 +16,38 @@ game.PlayScreen = me.ScreenObject.extend({
         me.input.bindGamepad(i, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold:  0.5}, ctrls[i][1]);
         me.input.bindGamepad(i, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_1}, ctrls[i][2]);
         me.input.bindGamepad(i, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_2}, ctrls[i][3]);
+        me.input.bindGamepad(i, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_3}, ctrls[i][2]);
+        me.input.bindGamepad(i, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_4}, ctrls[i][3]);
       }
 
+		me.pool.register("player1", game.Player1Entity);
+      me.pool.register("player2", game.Player2Entity);
+      me.pool.register("player3", game.Player3Entity);
+      me.pool.register("player4", game.Player4Entity);
+
+		// Load level
       var h = 0;
       if (game.TitleScreen.map_selected == 0) {
   		    h = Math.floor((Math.random() * 8) + 1);
       } else {
           h = game.TitleScreen.map_selected;
       }
+
   		me.levelDirector.loadLevel("area0" + h);
+
+
+      game.players = new Array(4);
+  		game.players[0] = me.game.world.getChildByName("player1")[0];
+  		game.players[1] = me.game.world.getChildByName("player2")[0];
+  		game.players[2] = me.game.world.getChildByName("player3")[0];
+  		game.players[3] = me.game.world.getChildByName("player4")[0];
+
+		if (game.data.playerCount < 4) {
+			me.game.world.removeChild(game.players[3]);
+		};
+		if (game.data.playerCount < 3) {
+			me.game.world.removeChild(game.players[2]);
+		};
 
       // reset the score
       game.data.health = [];
@@ -39,12 +62,6 @@ game.PlayScreen = me.ScreenObject.extend({
       if (!me.game.world.hasChild(this.HUD)) {
         me.game.world.addChild(this.HUD);
       }
-
-      game.players = new Array(4);
-  		game.players[0] = me.game.world.getChildByName("player1")[0];
-  		game.players[1] = me.game.world.getChildByName("player2")[0];
-  		game.players[2] = me.game.world.getChildByName("player3")[0];
-  		game.players[3] = me.game.world.getChildByName("player4")[0];
 
       game.winner_screen = false;
 
@@ -108,8 +125,9 @@ game.PlayScreen = me.ScreenObject.extend({
     /**
      *  action to perform when leaving this screen (state change)
      */
-    onDestroyEvent: function() {
-        // remove the HUD from the game world
-        me.game.world.removeChild(this.HUD, true);
-    }
+   onDestroyEvent: function() {
+		me.event.unsubscribe(this.handler);
+      // remove the HUD from the game world
+		me.game.world.removeChild(this.HUD, true);
+	}
 });
