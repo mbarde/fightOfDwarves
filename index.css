@@ -17,6 +17,21 @@ body {
     margin: 0;
 }
 
+.div-sidebar {
+	position: absolute;
+	left: 10px;
+	padding: 10px;
+}
+
+.div-sidebar button {
+	font-size: 17px;
+}
+
+.div-info {
+	font-size: 20px;
+	padding: 20px;
+}
+
 #screen canvas {
     margin: auto;
 

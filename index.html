@@ -14,8 +14,25 @@
         <link rel="manifest" href="manifest.json">
     </head>
     <body>
+		 <div class="div-sidebar"><button onclick="window.scrollTo(0, 500);">Find instructions below</button></div>
         <!-- Canvas placeholder -->
         <div id="screen"></div>
+
+	 	<div class="div-info">
+			<h1>Instructions:</h1>
+			<ul>
+				<li>Press F11 for fullscreen</li>
+				<li>Change player controls: Navigate to player and press enter. Press buttons for displayed actions. Attention: There is no check if buttons are assigned multiple times!</li>
+				<li>Gamepad support: Simply plug in your gamepads. The input will be mapped automatically to the player keys.</li>
+				<li>Dwarves can:
+					<ul>
+						<li>Attack</li>
+						<li>Jump</li>
+						<li>Run: left and right</li>
+						<li>Block: If you are attacked while blocking, you wont loose any health but your blocking will stop immediately.</li>
+					</ul>
+			</ul>
+		</div>
 
         <!-- melonJS Library -->
         <!-- build:js js/app.min.js -->
@@ -30,7 +47,7 @@
 
         <script type="text/javascript" src="js/entities/entities.js"></script>
         <script type="text/javascript" src="js/entities/HUD.js"></script>
-		
+
         <script type="text/javascript" src="js/screens/title.js"></script>
         <script type="text/javascript" src="js/screens/play.js"></script>
         <!-- /build -->

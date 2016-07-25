@@ -149,7 +149,10 @@ game.TitleScreen = me.ScreenObject.extend({
 				if (this.log_controls_state == 3) {
 					game.TitleScreen.settings[ game.TitleScreen.selected_setting ].values[0] = "ATTACK";
 				}
-				if (this.log_controls_state > 3) {
+				if (this.log_controls_state == 4) {
+					game.TitleScreen.settings[ game.TitleScreen.selected_setting ].values[0] = "BLOCK";
+				}
+				if (this.log_controls_state > 4) {
 					//console.log(game.TitleScreen.controls[this.log_controls]);
 					this.log_controls = -1;
 					this.log_controls_state = -1;

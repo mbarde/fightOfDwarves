@@ -4,19 +4,20 @@ var game = {
 
     music_volume: 0.3,
 
-    // an object where to store game information
     data : {
-		   initHealth: 100,
-		   playerCount: 4,
-        	health : []
+		   initHealth: 100,	// Initial health for each player.
+		   playerCount: 4,	// Player count.
+        	health : []			// Array to store players health points.
     },
 
 	 constants : {
-		 attack_power: 10,
-		 attack_push_power: 60,
-		 flicker_time: 100,
-		 winner_time: 4000,
-		 block_burst_time: 1000
+		 attack_power: 10, 								// How much HP does a player loose when being attacked.
+		 attack_push_power: 60, 						// Strength of push when being attacked. Horizontal velocity.
+		 attack_push_power_block: 60, 				// Strength of push when blocking while being attacked
+		 flicker_time: 100,								// How long does player flicker when being attacked (ms).
+		 winner_time: 4000,								// How long does the game wait after a player won until it goes on (ms).
+		 block_burst_time: 1000, 						// When block is destroyed by attack, player has to wait this time (in ms) until he can block again.
+		 block_burst_vulnerability_threshold: 400	// When block is destroyed by attack, player is invulnerable until block_burst_time runs below this threshold.
 	 },
 
     players : [],

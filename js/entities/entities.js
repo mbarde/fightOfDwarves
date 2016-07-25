@@ -45,6 +45,7 @@ PlayerEntity = me.Entity.extend({
                                           // Set to 0 when enemy has been hit to avoid multiple hits per attack.
 		this.body.blocking = false; // body is currently blocking
 		this.body.block_burst = 0; // counter which will be set when player block has been burst. New block only possible when counter reaches 0 again.
+		this.body.block_key_pressed = false;
 
   		// set the standing animation as default
   		this.renderable.setCurrentAnimation("jump");
@@ -132,12 +133,18 @@ PlayerEntity = me.Entity.extend({
 		}
 
 		if (this.body.vel.x == 0 && !this.body.isAttacked && !this.body.attacking
-				&& !this.body.jumping && !this.body.falling && this.body.block_burst == 0
-				&& me.input.isKeyPressed('block' + this.playerid)) {
-			this.renderable.setCurrentAnimation("block");
-			this.body.blocking = true;
+			&& !this.body.jumping && !this.body.falling && this.body.block_burst == 0
+			&& me.input.isKeyPressed('block' + this.playerid)
+			&& (this.body.blocking || !this.body.block_key_pressed)) {
+				this.renderable.setCurrentAnimation("block");
+				this.body.blocking = true;
+				this.body.block_key_pressed = true;
 		} else {
 			this.body.blocking = false;
+		}
+
+		if (!me.input.isKeyPressed('block' + this.playerid)) {
+			this.body.block_key_pressed = false;
 		}
 
 		if ( this.body.vel.y !=0 && !this.renderable.isCurrentAnimation("jump") && !this.body.attacking ) {
@@ -191,23 +198,29 @@ PlayerEntity = me.Entity.extend({
 			// check if this player is attacked by someone
   			if (!this.body.dead && response.a.body.attacking && !this.body.attacking
             && !this.body.isAttacked && response.a.body.current_attack_power > 0
+				&& this.body.block_burst <= game.constants.block_burst_vulnerability_threshold
             && ( // check if attacker has right direction to be able to hit attacked
               (response.a.renderable.lastflipX && response.a.pos.x >= response.b.pos.x) // attacker stands on right side of attacked
               ||
               (!response.a.renderable.lastflipX && response.a.pos.x <= response.b.pos.x) // attacker stands on left side of attacked
             )
          ) {
-				// If player is blocking he wont be hurt, but his block will be destroyed
+				// If player is blocking he wont be hurt, but his block will be destroyed and he will be pushed as well.
 				if (this.body.blocking) {
 					this.body.blocking = false;
 					this.body.block_burst = game.constants.block_burst_time;
+
+					if (response.a.pos.x > response.b.pos.x) {
+	            	this.body.push_power_x = -game.constants.attack_push_power_block;
+	            } else {
+	               this.body.push_power_x = game.constants.attack_push_power_block;
+	            }
 				} else {
 				   this.body.isAttacked = true;
 			      game.data.health[this.playerid-1] -= response.a.body.current_attack_power;
 	            response.a.body.current_attack_power = 0;
 	            me.audio.play("hit01");
 
-	            //this.body.vel.y = - this.body.maxVel.y * 0.2 * me.timer.tick;
 	            if (response.a.pos.x > response.b.pos.x) {
 	            	this.body.push_power_x = -game.constants.attack_push_power;
 	            } else {
