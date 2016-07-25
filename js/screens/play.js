@@ -72,14 +72,6 @@ game.PlayScreen = me.ScreenObject.extend({
             me.audio.stopTrack();
             me.state.change(me.state.MENU);
           }
-          if (game.winner_screen) {
-              game.winner_screen = false;
-              //game.reset();
-              //helper.reset();
-              //game.reset();
-              me.state.change(me.state.MENU);
-              me.state.change(me.state.PLAY);
-          }
       });
 
     },
@@ -94,6 +86,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		if (c == game.data.playerCount-1 && !game.winner_screen) {
       me.audio.pauseTrack();
       game.winner_screen = true;
+		game.win_time = new Date().getTime();
 
       // Add text Player X won!
       me.game.world.addChild(new (me.Renderable.extend ({
@@ -104,6 +97,14 @@ game.PlayScreen = me.ScreenObject.extend({
         },
 
         update : function (dt) {
+			  var t = new Date().getTime();
+			  if (t > game.win_time + game.constants.winner_time) {
+					game.winner_screen = false;
+					//game.reset();
+					//helper.reset();
+					//game.reset();
+					me.state.change(me.state.MENU);
+				}
           return true;
         },
 

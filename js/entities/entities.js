@@ -116,7 +116,7 @@ PlayerEntity = me.Entity.extend({
 		if (!this.body.isAttacked && !this.body.attacking && me.input.isKeyPressed('attack' + this.playerid)) {
       me.audio.play("attack02");
 			this.body.attacking = true;
-      this.body.current_attack_power = 10;
+      this.body.current_attack_power = game.constants.attack_power;
 			var b = this.body;
 			this.renderable.setCurrentAnimation("attack", function() {
 				b.attacking = false;
@@ -187,13 +187,13 @@ PlayerEntity = me.Entity.extend({
 
                 //this.body.vel.y = - this.body.maxVel.y * 0.2 * me.timer.tick;
                 if (response.a.pos.x > response.b.pos.x) {
-                  this.body.push_power_x = -35;
+                  this.body.push_power_x = -game.constants.attack_push_power;
                 } else {
-                  this.body.push_power_x = 35;
+                  this.body.push_power_x = game.constants.attack_push_power;
                 }
 
 			          var b = this.body;
-	              this.renderable.flicker(100, function() { b.isAttacked = false; });
+	              this.renderable.flicker(game.constants.flicker_time, function() { b.isAttacked = false; });
   		  }
   		  return false;
       } else {

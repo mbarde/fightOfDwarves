@@ -11,6 +11,13 @@ var game = {
         	health : []
     },
 
+	 constants : {
+		 attack_power: 10,
+		 attack_push_power: 60,
+		 flicker_time: 100,
+		 winner_time: 4000
+	 },
+
     players : [],
 
     // Run on page load.

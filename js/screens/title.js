@@ -9,7 +9,7 @@ game.TitleScreen = me.ScreenObject.extend({
 	 */
 	onResetEvent : function () {
 
-		if (game.music_volume > 0) { me.audio.playTrack("menu", game.music_volume); }
+		if (game.music_volume > 0) { me.audio.playTrack("menu", game.music_volume+0.2); }
 
 		// title screen
 		var backgroundImage = new me.Sprite(
