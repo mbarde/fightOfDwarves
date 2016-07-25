@@ -23,10 +23,10 @@ PlayerEntity = me.Entity.extend({
 
 		this.renderable.addAnimation("jump",  [8]);
 
-		this.renderable.addAnimation("climb",  [0]);
+		this.renderable.addAnimation("block",  [9]);
 
 		// define a standing animation (using the first frame)
-		this.renderable.addAnimation("stand",  [16,17,18,19]);
+		this.renderable.addAnimation("stand",  [16,17,18,19], 200);
 
     this.reset();
     },
@@ -43,6 +43,8 @@ PlayerEntity = me.Entity.extend({
       this.body.isAttacked = false; // is body currently being attacked
       this.body.current_attack_power = 0; // power of current attack (amount of health reduce to enemy). Is set to certain value when attack starts.
                                           // Set to 0 when enemy has been hit to avoid multiple hits per attack.
+		this.body.blocking = false; // body is currently blocking
+		this.body.block_burst = 0; // counter which will be set when player block has been burst. New block only possible when counter reaches 0 again.
 
   		// set the standing animation as default
   		this.renderable.setCurrentAnimation("jump");
@@ -68,6 +70,13 @@ PlayerEntity = me.Entity.extend({
 			}
 		} else {
 
+		if (this.body.block_burst > 0) {
+			this.body.block_burst -= dt;
+		}
+		if (this.body.block_burst < 0) {
+			this.body.block_burst = 0;
+		}
+
 		if (this.body.boost_active && this.body.falling) {
 			this.body.boost_active = false;
 		}
@@ -92,8 +101,6 @@ PlayerEntity = me.Entity.extend({
 			}
 		} else {
   			this.body.vel.x = 0;
-  			// change to the standing animation
-  			if (!this.body.attacking) { this.renderable.setCurrentAnimation("stand"); }
 		}
 
     // Push power added up to X velocity and reduced per time step
@@ -114,9 +121,9 @@ PlayerEntity = me.Entity.extend({
     }
 
 		if (!this.body.isAttacked && !this.body.attacking && me.input.isKeyPressed('attack' + this.playerid)) {
-      me.audio.play("attack02");
+      	me.audio.play("attack02");
 			this.body.attacking = true;
-      this.body.current_attack_power = game.constants.attack_power;
+      	this.body.current_attack_power = game.constants.attack_power;
 			var b = this.body;
 			this.renderable.setCurrentAnimation("attack", function() {
 				b.attacking = false;
@@ -124,11 +131,20 @@ PlayerEntity = me.Entity.extend({
 			});
 		}
 
+		if (this.body.vel.x == 0 && !this.body.isAttacked && !this.body.attacking
+				&& !this.body.jumping && !this.body.falling && this.body.block_burst == 0
+				&& me.input.isKeyPressed('block' + this.playerid)) {
+			this.renderable.setCurrentAnimation("block");
+			this.body.blocking = true;
+		} else {
+			this.body.blocking = false;
+		}
+
 		if ( this.body.vel.y !=0 && !this.renderable.isCurrentAnimation("jump") && !this.body.attacking ) {
 			this.renderable.setCurrentAnimation("jump");
 		}
 
-		if (this.body.vel.y == 0 && this.body.vel.x == 0 && !this.renderable.isCurrentAnimation("stand") && !this.body.attacking) {
+		if (this.body.vel.y == 0 && this.body.vel.x == 0 && !this.renderable.isCurrentAnimation("stand") && !this.body.attacking && !this.body.blocking) {
 			this.renderable.setCurrentAnimation("stand");
 		}
 
@@ -172,6 +188,7 @@ PlayerEntity = me.Entity.extend({
   			} else {
   				this.body.boost_active = false;
   			}
+			// check if this player is attacked by someone
   			if (!this.body.dead && response.a.body.attacking && !this.body.attacking
             && !this.body.isAttacked && response.a.body.current_attack_power > 0
             && ( // check if attacker has right direction to be able to hit attacked
@@ -179,21 +196,27 @@ PlayerEntity = me.Entity.extend({
               ||
               (!response.a.renderable.lastflipX && response.a.pos.x <= response.b.pos.x) // attacker stands on left side of attacked
             )
-          ) {
-  				      this.body.isAttacked = true;
-			          game.data.health[this.playerid-1] -= response.a.body.current_attack_power;
-                response.a.body.current_attack_power = 0;
-                me.audio.play("hit01");
+         ) {
+				// If player is blocking he wont be hurt, but his block will be destroyed
+				if (this.body.blocking) {
+					this.body.blocking = false;
+					this.body.block_burst = game.constants.block_burst_time;
+				} else {
+				   this.body.isAttacked = true;
+			      game.data.health[this.playerid-1] -= response.a.body.current_attack_power;
+	            response.a.body.current_attack_power = 0;
+	            me.audio.play("hit01");
 
-                //this.body.vel.y = - this.body.maxVel.y * 0.2 * me.timer.tick;
-                if (response.a.pos.x > response.b.pos.x) {
-                  this.body.push_power_x = -game.constants.attack_push_power;
-                } else {
-                  this.body.push_power_x = game.constants.attack_push_power;
-                }
+	            //this.body.vel.y = - this.body.maxVel.y * 0.2 * me.timer.tick;
+	            if (response.a.pos.x > response.b.pos.x) {
+	            	this.body.push_power_x = -game.constants.attack_push_power;
+	            } else {
+	               this.body.push_power_x = game.constants.attack_push_power;
+	            }
 
-			          var b = this.body;
-	              this.renderable.flicker(game.constants.flicker_time, function() { b.isAttacked = false; });
+				   var b = this.body;
+		         this.renderable.flicker(game.constants.flicker_time, function() { b.isAttacked = false; });
+				}
   		  }
   		  return false;
       } else {

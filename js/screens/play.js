@@ -11,6 +11,7 @@ game.PlayScreen = me.ScreenObject.extend({
         me.input.bindKey(ctrls[i][1], "right" + (i+1));
         me.input.bindKey(ctrls[i][2],   "jump" + (i+1), true);
         me.input.bindKey(ctrls[i][3], "attack" + (i+1), true);
+        me.input.bindKey(ctrls[i][4], "block" + (i+1));
 
         me.input.bindGamepad(i, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold: -0.5}, ctrls[i][0]);
         me.input.bindGamepad(i, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold:  0.5}, ctrls[i][1]);

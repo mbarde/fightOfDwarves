@@ -23,19 +23,19 @@ game.TitleScreen = me.ScreenObject.extend({
 		game.TitleScreen.map_selected = 0;
 
 		game.TitleScreen.controls = [
-			 [ 65, 68, 87, 81 ],
-			 [ 86, 66, 71, 70 ],
-			 [ 74, 75, 73, 85 ],
-			 [ 37, 39, 38, 32 ]
+			 [ 65, 68, 87, 81, 83 ],
+			 [ 86, 66, 71, 70, 72 ],
+			 [ 74, 75, 73, 85, 79 ],
+			 [ 37, 39, 38, 32, 40 ]
 		];
 
 		if (typeof game.TitleScreen.settings === 'undefined') {
 			game.TitleScreen.settings = [
 				{ text: "PLAY", values: []},
 				{ text: "PLAYERCOUNT", values: [2,3,4], selection: 2, on_change: function(setting) { game.data.playerCount = setting.values[setting.selection]; } },
-				{ text: "CONTROLS 1", values: ["ADWQ"], selection: 0, ctrl_id: 0 },
-				{ text: "CONTROLS 2", values: ["VBGF"], selection: 0, ctrl_id: 1 },
-				{ text: "CONTROLS 3", values: ["JKIU"], selection: 0, ctrl_id: 2 },
+				{ text: "CONTROLS 1", values: ["ADWQS"], selection: 0, ctrl_id: 0 },
+				{ text: "CONTROLS 2", values: ["VBGFH"], selection: 0, ctrl_id: 1 },
+				{ text: "CONTROLS 3", values: ["JKIUO"], selection: 0, ctrl_id: 2 },
 				{ text: "CONTROLS 4", values: ["ARROWSPACE"], selection: 0, ctrl_id: 3 },
 				{ text: "MAP", values: [ "RANDOM", "BLOODY HALL", "DEEP DUNGEON", "PILLARS OF CLASH", "GOLDHAND", "4 COLORS", "WINDOW SHOPPERS", "UP AND DOWN", "CORRIDOR"], selection: 0,
 					on_change: function(setting) { game.TitleScreen.map_selected = setting.selection; } },

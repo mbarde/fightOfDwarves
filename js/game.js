@@ -15,7 +15,8 @@ var game = {
 		 attack_power: 10,
 		 attack_push_power: 60,
 		 flicker_time: 100,
-		 winner_time: 4000
+		 winner_time: 4000,
+		 block_burst_time: 1000
 	 },
 
     players : [],
