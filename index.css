@@ -17,6 +17,10 @@ body {
     margin: 0;
 }
 
+body a {
+	color: #717bff;
+}
+
 .div-sidebar {
 	position: absolute;
 	left: 10px;

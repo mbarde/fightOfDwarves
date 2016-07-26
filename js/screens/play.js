@@ -17,7 +17,7 @@ game.PlayScreen = me.ScreenObject.extend({
         me.input.bindGamepad(i, {type:"axes", code: me.input.GAMEPAD.AXES.LX, threshold:  0.5}, ctrls[i][1]);
         me.input.bindGamepad(i, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_1}, ctrls[i][2]);
         me.input.bindGamepad(i, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_2}, ctrls[i][3]);
-        me.input.bindGamepad(i, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_3}, ctrls[i][2]);
+        me.input.bindGamepad(i, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_3}, ctrls[i][4]);
         me.input.bindGamepad(i, {type:"buttons", code: me.input.GAMEPAD.BUTTONS.FACE_4}, ctrls[i][3]);
       }
 
