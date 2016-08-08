@@ -1,10 +1,18 @@
-Fight of Dwarves
+<h1>Fight of Dwarves</h2>
 -------------------------------------------------------------------------------
-Beat em up game based on MelonJS.
+4 player beat em up game based on MelonJS.
 http://melonjs.github.io/tutorial-platformer/
 
-Currently textures are from http://opengameart.org/
-Licenses need to be re-checked.
+<h3>Contributions:</h3>
+<ul>
+	<li>Dwarf sprites: <a href="http://opengameart.org/content/delve-deeper-dwarves">http://opengameart.org/content/delve-deeper-dwarves</a></li>
+	<li>Level tiles: <a href="http://opengameart.org/content/pixel-art-castle-tileset">http://opengameart.org/content/pixel-art-castle-tileset</a></li>
+	<li>Music</li>
+	<ul>
+		<li>Title screen: We're the Resistors by Eric Skiff: <a href="http://ericskiff.com/music/">http://ericskiff.com/music/</a></li>
+		<li>In game music: Ferrous Rage by Ozzed (Album: Cor Metallicum): <a href="http://ozzed.net/music/">http://ozzed.net/music/</a></li>
+	</ul>
+</ul>
 
 melonJS boilerplate
 -------------------------------------------------------------------------------
