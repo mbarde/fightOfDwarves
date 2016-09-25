@@ -14,6 +14,9 @@ http://melonjs.github.io/tutorial-platformer/
 	</ul>
 </ul>
 
+<h3>Known issues</h3>
+If you encounter errors while `npm-install` with package `chromium-pickle`, remove `grunt-asar` from package.json (https://github.com/melonjs/boilerplate/issues/20).
+
 melonJS boilerplate
 -------------------------------------------------------------------------------
 
