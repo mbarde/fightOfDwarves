@@ -1,6 +1,6 @@
 <h1>Fight of Dwarves</h2>
--------------------------------------------------------------------------------
-4 player beat em up game based on MelonJS.
+
+Arena fighting game for up to 4 players based on MelonJS.
 http://melonjs.github.io/tutorial-platformer/
 
 <h3>Contributions:</h3>
