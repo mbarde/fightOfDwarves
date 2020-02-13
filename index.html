@@ -29,46 +29,38 @@
 						<li>Attack</li>
 						<li>Jump</li>
 						<li>Run: left and right</li>
-						<li>Block: If you are attacked while blocking, you wont loose any health but your blocking will stop immediately.</li>
+						<li>Block</li>
 					</ul>
+			</ul>
+
+			<h1>Feedback</h1>
+			<ul>
+				<li>Thread at OpenGameArt: <a target="_blank" href="http://opengameart.org/forumtopic/fight-of-dwarves">http://opengameart.org/forumtopic/fight-of-dwarves</a></li>
+				<li>Direct feedback to me: <a target="_blank" href="http://mbarde.bplaced.de/www/#5">http://mbarde.bplaced.de/www/#5</a></li>
 			</ul>
 
 			<h1>Contributions:</h1>
 			<ul>
-				<li>Dwarf sprites: <a href="http://opengameart.org/content/delve-deeper-dwarves">http://opengameart.org/content/delve-deeper-dwarves</a></li>
-				<li>Level tiles: <a href="http://opengameart.org/content/pixel-art-castle-tileset">http://opengameart.org/content/pixel-art-castle-tileset</a></li>
+				<li>Dwarf sprites: <a target="_blank" href="http://opengameart.org/content/delve-deeper-dwarves">http://opengameart.org/content/delve-deeper-dwarves</a></li>
+				<li>Level tiles: <a target="_blank" href="http://opengameart.org/content/pixel-art-castle-tileset">http://opengameart.org/content/pixel-art-castle-tileset</a></li>
 				<li>Music</li>
 				<ul>
-					<li>Title screen: We're the Resistors by Eric Skiff: <a href="http://ericskiff.com/music/">http://ericskiff.com/music/</a></li>
-					<li>In game music: Ferrous Rage by Ozzed (Album: Cor Metallicum): <a href="http://ozzed.net/music/">http://ozzed.net/music/</a></li>
+					<li>Title screen: We're the Resistors by Eric Skiff: <a target="_blank" href="http://ericskiff.com/music/">http://ericskiff.com/music/</a></li>
+					<li>In game music: Ferrous Rage by Ozzed (Album: Cor Metallicum): <a target="_blank" href="http://ozzed.net/music/">http://ozzed.net/music/</a></li>
 				</ul>
 			</ul>
 
 			<h1>Technical details:</h1>
 			<ul>
-				<li>GitHub repository: <a href="https://github.com/mbarde/fightOfDwarves">https://github.com/mbarde/fightOfDwarves</a></li>
+				<li>GitHub repository: <a target="_blank" href="https://github.com/mbarde/fightOfDwarves">https://github.com/mbarde/fightOfDwarves</a></li>
 				<li>FightOfDwarves has been realized with <a target="_blank" href="http://melonjs.org/">MelonJS</a>, which <q>is a lightweight but yet powerful HTML5 framework designed from the ground up to provide a true plugin-free 'write-once, run-everywhere' gaming oriented library.</q></li>
-				<li>Loosely based on this tutorial: <a href="http://melonjs.github.io/tutorial-platformer/">http://melonjs.github.io/tutorial-platformer/</a></li>
+				<li>Loosely based on this tutorial: <a target="_blank" href="http://melonjs.github.io/tutorial-platformer/">http://melonjs.github.io/tutorial-platformer/</a></li>
 			</ul>
 		</div>
 
         <!-- melonJS Library -->
-        <!-- build:js js/app.min.js -->
         <script type="text/javascript" src="lib/melonJS.js"></script>
-
-        <!-- Plugin(s) -->
-        <script type="text/javascript" src="lib/plugins/debug/debugPanel.js"></script>
-
-        <!-- Game Scripts -->
-        <script type="text/javascript" src="js/game.js"></script>
-        <script type="text/javascript" src="build/js/resources.js"></script>
-
-        <script type="text/javascript" src="js/entities/entities.js"></script>
-        <script type="text/javascript" src="js/entities/HUD.js"></script>
-
-        <script type="text/javascript" src="js/screens/title.js"></script>
-        <script type="text/javascript" src="js/screens/play.js"></script>
-        <!-- /build -->
+        <script src="js/app.min.js"></script>
         <!-- Bootstrap & Mobile optimization tricks -->
         <script type="text/javascript">
             window.onReady(function onReady() {
